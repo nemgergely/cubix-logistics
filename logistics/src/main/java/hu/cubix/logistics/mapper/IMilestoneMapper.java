@@ -1,5 +1,6 @@
 package hu.cubix.logistics.mapper;
 
+import hu.cubix.logistics.dto.MilestoneDelayDto;
 import hu.cubix.logistics.dto.MilestoneDto;
 import hu.cubix.logistics.entities.Milestone;
 import org.mapstruct.Mapper;
@@ -13,4 +14,6 @@ public interface IMilestoneMapper {
     List<MilestoneDto> milestonesToDtos(List<Milestone> Milestones);
     Milestone dtoToMilestone(MilestoneDto MilestoneDto);
     List<Milestone> dtosToMilestones(List<MilestoneDto> MilestoneDtos);
+
+    Milestone delayDtoToMilestone(MilestoneDelayDto delayDto);
 }

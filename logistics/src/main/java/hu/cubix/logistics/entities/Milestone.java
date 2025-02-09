@@ -20,7 +20,7 @@ public class Milestone {
 
     private LocalDateTime plannedTime;
 
-    @OneToOne(mappedBy = "milestone")
+    @OneToOne(mappedBy = "milestone", fetch = FetchType.EAGER)
     private Address address;
 
     @OneToOne

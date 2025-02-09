@@ -1,5 +1,6 @@
 package hu.cubix.logistics.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,9 @@ import java.time.LocalDateTime;
 public class MilestoneDto {
 
     private Long id;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime plannedTime;
+
     private AddressDto addressDto;
 }

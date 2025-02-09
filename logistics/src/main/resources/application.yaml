@@ -15,3 +15,16 @@ logging:
     org:
       springframework:
         security: DEBUG
+logistics:
+  transport:
+    delay:
+      limit:
+        first-category: 0
+        second-category: 30
+        third-category: 60
+        fourth-category: 120
+      percentage:
+        first-category: 2
+        second-category: 4
+        third-category: 8
+        fourth-category: 16

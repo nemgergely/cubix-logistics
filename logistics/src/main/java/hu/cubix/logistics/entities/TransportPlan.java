@@ -20,6 +20,6 @@ public class TransportPlan {
 
     private Integer income;
 
-    @OneToMany(mappedBy = "transportPlan")
+    @OneToMany(mappedBy = "transportPlan", fetch = FetchType.EAGER)
     private List<Section> sections;
 }

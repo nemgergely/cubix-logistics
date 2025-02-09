@@ -18,10 +18,10 @@ public class Section {
 
     private Integer orderIndex;
 
-    @OneToOne(mappedBy = "section")
+    @OneToOne(mappedBy = "section", fetch = FetchType.EAGER)
     private Milestone startMilestone;
 
-    @OneToOne(mappedBy = "section")
+    @OneToOne(mappedBy = "section", fetch = FetchType.EAGER)
     private Milestone endMilestone;
 
     @ManyToOne
