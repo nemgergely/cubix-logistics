@@ -18,12 +18,12 @@ public class AddressSpecification {
             cb.like(cb.lower(root.get(Address_.street)), streetPrefix.toLowerCase() + "%");
     }
 
-    public static Specification<Address> countryMatches(String country) {
+    public static Specification<Address> isoCodeMatches(String isoCode) {
         return (root, cq, cb) ->
-            cb.equal(root.get(Address_.country), country);
+            cb.equal(root.get(Address_.isoCode), isoCode);
     }
 
-    public static Specification<Address> zipCodeMatches(String zipCode) {
+    public static Specification<Address> zipCodeMatches(Integer zipCode) {
         return (root, cq, cb) ->
             cb.equal(root.get(Address_.zipCode), zipCode);
     }

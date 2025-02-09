@@ -18,12 +18,10 @@ public class Milestone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "planned_time")
     private LocalDateTime plannedTime;
 
-    @OneToOne(mappedBy = "milestone", fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-
-    @OneToOne
-    @JoinColumn(name = "section_id")
-    private Section section;
 }

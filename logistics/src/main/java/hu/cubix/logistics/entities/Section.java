@@ -16,12 +16,15 @@ public class Section {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "order_index")
     private Integer orderIndex;
 
-    @OneToOne(mappedBy = "section", fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "start_milestone_id", referencedColumnName = "id")
     private Milestone startMilestone;
 
-    @OneToOne(mappedBy = "section", fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "end_milestone_id", referencedColumnName = "id")
     private Milestone endMilestone;
 
     @ManyToOne

@@ -13,10 +13,9 @@ public class AddressDto {
 
     private Long id;
     private String isoCode;
-    private String country;
     private String city;
     private String street;
-    private String zipCode;
+    private Integer zipCode;
     private Integer houseNumber;
     private Double latitude;
     private Double longitude;

@@ -48,7 +48,6 @@ public class AddressService {
     public Address updateAddressById(Address address) {
         Address addressToUpdate = addressRepository.findById(address.getId()).orElseThrow();
         addressToUpdate.setIsoCode(address.getIsoCode());
-        addressToUpdate.setCountry(address.getCountry());
         addressToUpdate.setCity(address.getCity());
         addressToUpdate.setStreet(address.getStreet());
         addressToUpdate.setZipCode(address.getZipCode());
@@ -59,7 +58,6 @@ public class AddressService {
         if (address.getLongitude() != null) {
             addressToUpdate.setLongitude(address.getLongitude());
         }
-
         return addressToUpdate;
     }
 
@@ -70,13 +68,13 @@ public class AddressService {
 
     private Specification<Address> getSpecification(Address address) {
         Specification<Address> addressSpec = Specification.where(null);
-        String country = address.getCountry();
+        String isoCode = address.getIsoCode();
         String cityPrefix = address.getCity();
         String streetPrefix = address.getStreet();
-        String zipCode = address.getZipCode();
+        Integer zipCode = address.getZipCode();
 
-        if (StringUtils.hasLength(country)) {
-            addressSpec = addressSpec.and(countryMatches(country));
+        if (StringUtils.hasLength(isoCode)) {
+            addressSpec = addressSpec.and(isoCodeMatches(isoCode));
         }
         if (StringUtils.hasLength(cityPrefix)) {
             addressSpec = addressSpec.and(cityStartsWith(cityPrefix));
@@ -84,7 +82,7 @@ public class AddressService {
         if (StringUtils.hasLength(streetPrefix)) {
             addressSpec = addressSpec.and(streetStartsWith(streetPrefix));
         }
-        if (StringUtils.hasLength(zipCode)) {
+        if (zipCode != null) {
             addressSpec = addressSpec.and(zipCodeMatches(zipCode));
         }
         return addressSpec;

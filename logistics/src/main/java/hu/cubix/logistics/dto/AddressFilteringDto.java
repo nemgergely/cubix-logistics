@@ -11,8 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AddressFilteringDto {
 
-    private String country;
+    private String isoCode;
     private String city;
     private String street;
-    private String zipCode;
+    private Integer zipCode;
 }

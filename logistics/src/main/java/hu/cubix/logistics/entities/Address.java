@@ -19,23 +19,19 @@ public class Address {
     @Column(name = "iso_code", columnDefinition = "varchar(2)")
     private String isoCode;
 
-    private String country;
-
     private String city;
 
     private String street;
 
     @Column(name = "zip_code")
-    private String zipCode;
+    private Integer zipCode;
 
     @Column(name = "house_number")
     private Integer houseNumber;
 
+    @Column(columnDefinition = "numeric", precision = 4)
     private Double latitude;
 
+    @Column(columnDefinition = "numeric", precision = 4)
     private Double longitude;
-
-    @OneToOne
-    @JoinColumn(name = "milestone_id")
-    private Milestone milestone;
 }
