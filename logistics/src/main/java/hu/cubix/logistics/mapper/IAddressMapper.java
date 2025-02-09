@@ -1,6 +1,7 @@
 package hu.cubix.logistics.mapper;
 
 import hu.cubix.logistics.dto.AddressDto;
+import hu.cubix.logistics.dto.AddressFilteringDto;
 import hu.cubix.logistics.entities.Address;
 import org.mapstruct.Mapper;
 
@@ -13,4 +14,6 @@ public interface IAddressMapper {
     List<AddressDto> addressesToDtos(List<Address> addresses);
     Address dtoToAddress(AddressDto addressDto);
     List<Address> dtosToAddresses(List<AddressDto> addressDtos);
+
+    Address filteringDtoToAddress(AddressFilteringDto addressFilteringDto);
 }
