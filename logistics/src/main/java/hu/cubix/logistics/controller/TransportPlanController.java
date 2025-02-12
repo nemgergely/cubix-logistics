@@ -25,6 +25,8 @@ public class TransportPlanController {
         @RequestBody @Valid MilestoneDelayDto milestoneDelayDto) {
 
         TransportPlan transportPlan = transportPlanService.registerDelayToTransportPlan(id, milestoneDelayDto);
-        return new ResponseEntity<>(transportPlanMapper.transportPlanToDto(transportPlan), HttpStatus.OK);
+        TransportPlanDto transportPlanDto = transportPlanMapper.transportPlanToDto(transportPlan);
+
+        return new ResponseEntity<>(transportPlanDto, HttpStatus.OK);
     }
 }

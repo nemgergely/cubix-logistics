@@ -27,7 +27,7 @@ public class Section {
     @JoinColumn(name = "end_milestone_id", referencedColumnName = "id")
     private Milestone endMilestone;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transport_plan_id")
     private TransportPlan transportPlan;
 }

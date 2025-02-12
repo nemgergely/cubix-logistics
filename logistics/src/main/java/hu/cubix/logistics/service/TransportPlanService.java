@@ -33,20 +33,23 @@ public class TransportPlanService {
         TransportPlan transportPlan = transportPlanRepository.findById(id).orElseThrow(
             () -> new RecordNotFoundException("transport plan")
         );
+        Long transportPlanId = transportPlan.getId();
 
-        registerDelayToSections(milestoneId, delay);
+        registerDelayToSections(transportPlanId, milestoneId, delay);
 
         transportPlan.setIncome(calculateNewIncome(transportPlan.getIncome(), delay));
         return transportPlan;
     }
 
-    private void registerDelayToSections(Long milestoneId, Integer delay) {
+    private void registerDelayToSections(Long transportPlanId, Long milestoneId, Integer delay) {
         if (!milestoneRepository.existsById(milestoneId)) {
             throw new RecordNotFoundException("milestone");
         }
 
-        Section sectionByStartMilestone = sectionRepository.findByStartMilestoneId(milestoneId);
-        Section sectionByEndMilestone = sectionRepository.findByEndMilestoneId(milestoneId);
+        Section sectionByStartMilestone =
+            sectionRepository.findByTransportPlanAndStartMilestoneId(transportPlanId, milestoneId);
+        Section sectionByEndMilestone =
+            sectionRepository.findByTransportPlanAndEndMilestoneId(transportPlanId, milestoneId);
 
         if (sectionByStartMilestone == null && sectionByEndMilestone == null) {
             throw new MilestoneWithoutSectionException();
@@ -70,8 +73,8 @@ public class TransportPlanService {
         Milestone endMilestone = sectionByEndMilestone.getEndMilestone();
         endMilestone.setPlannedTime(endMilestone.getPlannedTime().plusMinutes(delay));
 
-        Long transportPlanId = sectionByEndMilestone.getTransportPlan().getId();
         Integer nextOrderIndex = sectionByEndMilestone.getOrderIndex() + 1;
+        Long transportPlanId = sectionByEndMilestone.getTransportPlan().getId();
         Section nextSection = sectionRepository.findByTransportPlanIdAndOrderIndex(transportPlanId, nextOrderIndex);
         if (nextSection != null) {
             Milestone nextStartMilestone = nextSection.getStartMilestone();

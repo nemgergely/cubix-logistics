@@ -17,17 +17,17 @@ import java.util.List;
 public class MyExceptionHandler {
 
     @ExceptionHandler({IdMismatchException.class, MilestoneWithoutSectionException.class})
-    public ResponseEntity<String> handleIdAndMilestoneMismatch(RuntimeException e, WebRequest request) {
+    public ResponseEntity<MyErrorResponse> handleIdAndMilestoneMismatch(RuntimeException e, WebRequest request) {
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
-            .body(e.getMessage());
+            .body(new MyErrorResponse(e.getMessage()));
     }
 
     @ExceptionHandler(RecordNotFoundException.class)
-    public ResponseEntity<String> handleDataNotFound(RecordNotFoundException e, WebRequest request) {
+    public ResponseEntity<MyErrorResponse> handleDataNotFound(RecordNotFoundException e, WebRequest request) {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
-            .body(e.getMessage());
+            .body(new MyErrorResponse(e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

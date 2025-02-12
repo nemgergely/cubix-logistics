@@ -19,5 +19,5 @@ public class MilestoneDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime plannedTime;
 
-    private AddressDto addressDto;
+    private AddressDto address;
 }

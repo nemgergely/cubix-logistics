@@ -13,6 +13,6 @@ public class SectionDto {
 
     private Long id;
     private Integer orderIndex;
-    private MilestoneDto startMilestoneDto;
-    private MilestoneDto endMilestoneDto;
+    private MilestoneDto startMilestone;
+    private MilestoneDto endMilestone;
 }
