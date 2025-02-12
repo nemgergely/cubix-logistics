@@ -1,6 +1,8 @@
 package hu.cubix.logistics.service;
 
 import hu.cubix.logistics.entities.Address;
+import hu.cubix.logistics.exception.RecordNotFoundException;
+import hu.cubix.logistics.exception.IdMismatchException;
 import hu.cubix.logistics.repository.AddressRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -41,12 +43,17 @@ public class AddressService {
     }
 
     public Address getAddressById(Long id) {
-        return addressRepository.findById(id).orElseThrow();
+        return addressRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("address"));
     }
 
     @Transactional
-    public Address updateAddressById(Address address) {
-        Address addressToUpdate = addressRepository.findById(address.getId()).orElseThrow();
+    public Address updateAddressById(Long id, Address address) {
+        if (!id.equals(address.getId())) {
+            throw new IdMismatchException();
+        }
+        Address addressToUpdate = addressRepository.findById(address.getId()).orElseThrow(
+            () -> new RecordNotFoundException("address")
+        );
         addressToUpdate.setIsoCode(address.getIsoCode());
         addressToUpdate.setCity(address.getCity());
         addressToUpdate.setStreet(address.getStreet());

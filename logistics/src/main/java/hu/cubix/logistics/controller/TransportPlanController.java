@@ -5,6 +5,7 @@ import hu.cubix.logistics.dto.TransportPlanDto;
 import hu.cubix.logistics.entities.TransportPlan;
 import hu.cubix.logistics.mapper.ITransportPlanMapper;
 import hu.cubix.logistics.service.TransportPlanService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class TransportPlanController {
     @PostMapping("/{id}/delay")
     public ResponseEntity<TransportPlanDto> registerDelayToTransportPlan(
         @PathVariable Long id,
-        @RequestBody MilestoneDelayDto milestoneDelayDto) {
+        @RequestBody @Valid MilestoneDelayDto milestoneDelayDto) {
 
         TransportPlan transportPlan = transportPlanService.registerDelayToTransportPlan(id, milestoneDelayDto);
         return new ResponseEntity<>(transportPlanMapper.transportPlanToDto(transportPlan), HttpStatus.OK);

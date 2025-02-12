@@ -12,5 +12,8 @@ public interface SectionRepository extends JpaRepository<Section, Long> {
     @Query(value = "SELECT s FROM Section s WHERE s.endMilestone.id = :milestoneId")
     Section findByEndMilestoneId(long milestoneId);
 
-    Section findByOrderIndex(Integer orderIndex);
+    @Query(value = "SELECT s FROM Section s " +
+        "WHERE s.transportPlan.id = :transportPlanId " +
+        "AND s.orderIndex = :orderIndex")
+    Section findByTransportPlanIdAndOrderIndex(Long transportPlanId, Integer orderIndex);
 }
