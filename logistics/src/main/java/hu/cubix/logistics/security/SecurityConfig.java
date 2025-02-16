@@ -32,18 +32,18 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.builder()
+        UserDetails addressMgr = User.builder()
             .username("addressMgr")
             .password(passwordEncoder.encode("sultkrumpli"))
             .authorities("AddressManager")
             .build();
-        UserDetails admin = User.builder()
+        UserDetails transportMgr = User.builder()
             .username("transportMgr")
             .password(passwordEncoder.encode("rantotthus"))
             .authorities("TransportManager")
             .build();
 
-        return new InMemoryUserDetailsManager(user, admin);
+        return new InMemoryUserDetailsManager(addressMgr, transportMgr);
     }
 
     @Bean
