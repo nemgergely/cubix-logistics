@@ -41,7 +41,7 @@ public class MyExceptionHandler {
             .toList();
 
         MyErrorResponse myErrorResponse = new MyErrorResponse("One or more fields have failed the validation");
-        myErrorResponse.setValidationErrors(errors);
+        myErrorResponse.getValidationErrors().addAll(errors);
 
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
