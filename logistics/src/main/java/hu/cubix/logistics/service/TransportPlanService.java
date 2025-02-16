@@ -93,7 +93,7 @@ public class TransportPlanService {
         if (delay > limit.getFirstCategory() && delay < limit.getSecondCategory()) {
             return percentage.getFirstCategory();
         } else if (delay < limit.getThirdCategory()) {
-            return percentage.getThirdCategory();
+            return percentage.getSecondCategory();
         } else if (delay < limit.getFourthCategory()) {
             return percentage.getThirdCategory();
         } else {
