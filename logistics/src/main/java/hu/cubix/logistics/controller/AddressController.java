@@ -8,6 +8,7 @@ import hu.cubix.logistics.service.AddressService;
 import hu.cubix.logistics.validation.CreateAddressValidation;
 import hu.cubix.logistics.validation.UpdateAddressValidation;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -46,8 +47,9 @@ public class AddressController {
         ) Pageable pageable) {
 
         Address addressCriteria = addressMapper.filteringDtoToAddress(addressFilteringDto);
-        List<Address> filteredAddresses = addressService.getAddressesBySearchCriteria(addressCriteria, pageable);
-        long totalAddressCount = addressService.getTotalAddressCountBySearchCriteria(addressCriteria);
+        Page<Address> addressPage = addressService.getAddressesBySearchCriteria(addressCriteria, pageable);
+        long totalAddressCount = addressPage.getTotalElements();
+        List<Address> filteredAddresses = addressPage.getContent();
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("X-Total-Count", String.valueOf(totalAddressCount));
