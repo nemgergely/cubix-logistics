@@ -27,15 +27,9 @@ public class AddressService {
         return addressRepository.save(address);
     }
 
-    public List<Address> getAddressesBySearchCriteria(Address address, Pageable pageable) {
+    public Page<Address> getAddressesBySearchCriteria(Address address, Pageable pageable) {
         Specification<Address> specifications = getSpecification(address);
-        Page<Address> addressPage = addressRepository.findAll(specifications, pageable);
-        return addressPage.getContent();
-    }
-
-    public long getTotalAddressCountBySearchCriteria(Address address) {
-        Specification<Address> specifications = getSpecification(address);
-        return addressRepository.count(specifications);
+        return addressRepository.findAll(specifications, pageable);
     }
 
     public List<Address> getAllAddresses() {
